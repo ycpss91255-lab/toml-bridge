@@ -3,7 +3,7 @@
 # from.
 #
 # Provenance: a verbatim copy of script/ci/release-ref.sh in
-# ycpss91255-docker/base, which owns the rule. It travels with any repo
+# ycpss91255-lab/base, which owns the rule. It travels with any repo
 # that publishes an image on tag, because a workflow cannot reach into
 # another repository for a script. The rationale below is base's and
 # names base's workflows; they are the history of why this refuses

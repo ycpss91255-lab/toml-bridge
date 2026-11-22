@@ -12,9 +12,9 @@
 # The published image is pulled by consumers rather than built by them;
 # a consumer that already assembles its own tooling image may instead
 # lift the parser out of this one with
-# `COPY --from=ghcr.io/ycpss91255-docker/toml-bridge:<tag> \
+# `COPY --from=ghcr.io/ycpss91255-lab/toml-bridge:<tag> \
 #       /usr/local/bin/toml-bridge /usr/local/bin/toml-bridge`,
-# which is how ycpss91255-docker/base's test-tools image carries it.
+# which is how ycpss91255-lab/base's test-tools image carries it.
 #
 # The `tool-pin:` markers below are the org's pin-bot annotations: they
 # name the upstream each ARG tracks so a version bump is mechanical.
