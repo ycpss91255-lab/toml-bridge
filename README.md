@@ -7,7 +7,7 @@ It exists so that a repo whose host contract is "Docker + Git + `just`"
 can read TOML configuration without also demanding a host Python, a
 `pip`, or a virtualenv. Several projects in the org need exactly that,
 and until now the image was built ad hoc inside
-[`ycpss91255-docker/base`](https://github.com/ycpss91255-docker/base).
+[`ycpss91255-lab/base`](https://github.com/ycpss91255-lab/base).
 This repo is that image, extracted, so the projects that need it pull it
 instead of each rebuilding it.
 
@@ -18,7 +18,7 @@ as the pre-3.11 fallback for `tomllib`.
 ## Pull
 
 ```sh
-docker pull ghcr.io/ycpss91255-docker/toml-bridge:v0.1.0
+docker pull ghcr.io/ycpss91255-lab/toml-bridge:v0.1.0
 ```
 
 Pin to a tag — or, better, to a digest — and never to `:latest`. The
@@ -32,7 +32,7 @@ built on a native runner.
 `:main` also exists, as the rolling build of this branch. It is fine for
 trying the image out and is not something to depend on.
 
-> **`ycpss91255-docker/base` still publishes to this same package** from
+> **`ycpss91255-lab/base` still publishes to this same package** from
 > its own `release-toml-bridge.yaml`, carrying the recipe this repo was
 > extracted from. Until that workflow is retired, two repositories can
 > write the same tags, and `:main` is whichever of them ran last. The
@@ -304,7 +304,7 @@ exists is that the baked-in CLI carries `base`'s semantics: the
 consumer whose TOML has an array of tables that is not on that list
 gets no output for it and exit 0 — a silent nothing, not an error.
 
-`ycpss91255-research/vendor_kit` uses the image the second way, for
+`ycpss91255-lab/vendor_kit` uses the image the second way, for
 that reason. Nothing in the image or in `toml_bridge.py` is shaped to
 accommodate it; the image is a pinned Python 3.13 with `tomllib` in the
 stdlib and `tomli` installed, and that is the whole of what a runtime
@@ -314,8 +314,8 @@ consumer depends on.
 
 | Repo | How it uses the image |
 |---|---|
-| [`ycpss91255-docker/base`](https://github.com/ycpss91255-docker/base) | **application.** Reads its own configuration — `dist/script/docker/lib/toml_bridge.sh` shims the image, `conf.sh` tokenises `--kv` output. `base` also lifts the parser into its `test-tools` image with `COPY --from`, so repos downstream of `base` inherit it without pulling this image directly. |
-| [`ycpss91255-research/vendor_kit`](https://github.com/ycpss91255-research/vendor_kit) | **runtime.** Reads a consumer repo's manifest — the file that says which parts of a vendored tree get installed — with its own reader run inside the image, since the manifest's arrays are not `base`'s. |
+| [`ycpss91255-lab/base`](https://github.com/ycpss91255-lab/base) | **application.** Reads its own configuration — `dist/script/docker/lib/toml_bridge.sh` shims the image, `conf.sh` tokenises `--kv` output. `base` also lifts the parser into its `test-tools` image with `COPY --from`, so repos downstream of `base` inherit it without pulling this image directly. |
+| [`ycpss91255-lab/vendor_kit`](https://github.com/ycpss91255-lab/vendor_kit) | **runtime.** Reads a consumer repo's manifest — the file that says which parts of a vendored tree get installed — with its own reader run inside the image, since the manifest's arrays are not `base`'s. |
 
 ## Building and testing locally
 

@@ -2,10 +2,10 @@ name: Release toml-bridge image to GHCR
 
 # Single-purpose publisher for the containerised TOML parser. Pushes a
 # multi-arch (linux/amd64 + linux/arm64) image to
-# ghcr.io/ycpss91255-docker/toml-bridge.
+# ghcr.io/ycpss91255-lab/toml-bridge.
 #
-# Consumers -- ycpss91255-docker/base reading its own configuration,
-# ycpss91255-research/vendor_kit reading a consumer's manifest, and any
+# Consumers -- ycpss91255-lab/base reading its own configuration,
+# ycpss91255-lab/vendor_kit reading a consumer's manifest, and any
 # repo whose compose recipe needs TOML parsing -- pull this image rather
 # than building it locally, the same pattern release-test-tools.yaml
 # established for test-tools.
@@ -46,7 +46,7 @@ permissions:
   packages: write
 
 env:
-  IMAGE: ghcr.io/ycpss91255-docker/toml-bridge
+  IMAGE: ghcr.io/ycpss91255-lab/toml-bridge
 
 jobs:
   compute-matrix:
